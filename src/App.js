@@ -39,7 +39,7 @@ const App = (props) => {
     }
     window.addEventListener('resize', setResponsiveness);
     setResponsiveness();
-  }, [props.window]);
+  }, []);
   const sections = {
     'about': {
       buttonText: 'About',

@@ -8,6 +8,7 @@ import {
 import DescriptionIcon from '@material-ui/icons/Description';
 
 const About = (props) => {
+  const { isMobile } = props;
   const downloadResume = () => {
     alert('Download')
   }
@@ -17,13 +18,13 @@ const About = (props) => {
         item
         xs={12}>
         <Typography
-          variant="h1"
+          variant={isMobile ? 'h2' : 'h1'}
           component="div"
           align="center">
             Pablo Garin
         </Typography>
         <Typography
-          variant="h3"
+          variant={isMobile ? 'h4' : 'h3'}
           component="div"
           align="center"
           color="secondary">
@@ -35,6 +36,7 @@ const About = (props) => {
           <Button
             startIcon={<DescriptionIcon />}
             variant="contained"
+            size="large"
             color="secondary"
             onClick={() => downloadResume()}>
               Download Resume
