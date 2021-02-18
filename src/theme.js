@@ -29,7 +29,12 @@ const theme = createMuiTheme({
     background: {
       default: red[50]
     }
-  }
+  },
+  typography: {
+    h1: {
+      fontSize: '5rem'
+    }
+  },
 });
 
 export default theme;

@@ -1,5 +1,6 @@
 import {
-  useState
+  useState,
+  useEffect
 } from 'react';
 import {
   Backdrop,
@@ -18,6 +19,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import CloseIcon from '@material-ui/icons/Close';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,14 +39,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SideLinks = () => {
+const SideLinks = (props) => {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const theme = useTheme();
+  const { open: openDefault } = props;
   const transitionConfig = {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen,
   }
+  useEffect(() => {
+    setOpen(openDefault)
+  }, [openDefault]);
   const links = [
     {
       icon: <GitHubIcon />,
@@ -55,6 +61,11 @@ const SideLinks = () => {
       icon: <LinkedInIcon />,
       name: 'LinkedIn',
       url: 'https://www.linkedin.com/in/pablo-garin/'
+    },
+    {
+      icon: <TwitterIcon />,
+      name: 'Twitter',
+      url: 'https://twitter.com/PabloGarin1'
     }
   ]
   const goTo = (url) => {

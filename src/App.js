@@ -1,3 +1,4 @@
+import 'fontsource-roboto';
 import {
   useRef,
   useState,
@@ -14,22 +15,26 @@ import {
 import theme from './theme';
 // Custom Components
 import About from './components/About';
+import Education from './components/Education';
 import Experience from './components/Experience';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Sections from './components/Sections';
 import SideLinks from './components/SideLinks';
-import Studies from './components/Studies';
 
 const useStyles = makeStyles({
   aboutSection: {
     background: `linear-gradient(45deg, ${theme.palette.background.default}, ${theme.palette.secondary.light})`,
+    backgroundImage: 'url("/res/images/background.jpg")',
+    backgroundRepeat:'no-repeat',
+    backgroundSize: '120% auto',
     minHeight: '100vh'
   }
 })
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
   const classes = useStyles();
   useEffect(() => {
     const setResponsiveness = () => {
@@ -48,10 +53,10 @@ const App = () => {
       styles: classes.aboutSection,
     },
     'studies': {
-      title: 'Studies',
-      buttonText: 'Studies',
+      title: 'Education',
+      buttonText: 'Education',
       ref: useRef(null),
-      component: (<Studies />),
+      component: (<Education />),
     },
     'experience': {
       title: 'Job Experience',
@@ -63,10 +68,14 @@ const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <Header sections={sections} isMobile={isMobile}/>
+      <Header
+        sections={sections}
+        isMobile={isMobile}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}/>
       <Sections sections={sections} isMobile={isMobile}/>
       <Footer />
-      <SideLinks />
+      <SideLinks open={activeSection==="about"}/>
     </MuiThemeProvider>
   );
 }

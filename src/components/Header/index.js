@@ -19,8 +19,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import SectionsMenu from './SectionsMenu';
 
-const STEP_SIZE = 10;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     background: 'transparent',
@@ -39,12 +37,13 @@ const useStyles = makeStyles((theme) => ({
 const Header = (props) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [activeSection, setActiveSection] = useState(null);
   const classes = useStyles();
   const theme = useTheme();
   const {
+    activeSection,
     isMobile,
-    sections
+    setActiveSection,
+    sections,
   } = props;
   useEffect(() => {
     let currActiveSection = null;
@@ -56,7 +55,7 @@ const Header = (props) => {
       }
     }
     setActiveSection(currActiveSection);
-  }, [scrollPosition, sections]);
+  }, [scrollPosition, sections, setActiveSection]);
   // Local functions
   const selectView = (ref) => {
     const scrollPromise = new Promise((resolve, reject) => {

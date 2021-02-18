@@ -20,7 +20,7 @@ const Section = forwardRef((props, ref) => {
         container
         direction="row"
         justify="center"
-        alignItems="center"
+        alignItems="flex-start"
         style={{
           minHeight: '100vh',
           paddingTop: 56
