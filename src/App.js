@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   }
 })
 
-const App = (props) => {
+const App = () => {
   const [isMobile, setIsMobile] = useState(false);
   const classes = useStyles();
   useEffect(() => {
