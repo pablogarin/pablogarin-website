@@ -1,4 +1,8 @@
-import { useRef } from 'react';
+import {
+  useRef,
+  useState,
+  useEffect
+} from 'react';
 import {
   CssBaseline
 } from '@material-ui/core';
@@ -24,8 +28,18 @@ const useStyles = makeStyles({
   }
 })
 
-const App = () => {
+const App = (props) => {
+  const [isMobile, setIsMobile] = useState(false);
   const classes = useStyles();
+  useEffect(() => {
+    const setResponsiveness = () => {
+      window.innerWidth < 900
+        ? setIsMobile(true)
+        : setIsMobile(false)
+    }
+    window.addEventListener('resize', setResponsiveness);
+    setResponsiveness();
+  }, [props.window]);
   const sections = {
     'about': {
       buttonText: 'About',
@@ -49,8 +63,8 @@ const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <Header sections={sections} />
-      <Sections sections={sections} />
+      <Header sections={sections} isMobile={isMobile}/>
+      <Sections sections={sections} isMobile={isMobile}/>
       <Footer />
       <SideLinks />
     </MuiThemeProvider>

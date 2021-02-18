@@ -2,7 +2,10 @@ import React from 'react';
 import Section from './Section'
 
 const Sections = (props) => {
-  const {sections} = props;
+  const {
+    isMobile,
+    sections
+  } = props;
   return (
     <>
       {sections && Object.entries(sections).map(([key, section]) => (
@@ -10,6 +13,7 @@ const Sections = (props) => {
           key={key}
           ref={section.ref}
           sectionTitle={section.title}
+          isMobile={isMobile}
           className={section.styles}>
             {section.component}
         </Section>
