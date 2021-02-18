@@ -1,6 +1,6 @@
+import {useEffect} from 'react';
 import {
   Button,
-  Typography,
   AppBar,
   Toolbar,
   Grid
@@ -15,7 +15,15 @@ const useStyles = (theme) => (makeStyles({
   }
 }));
 
-const Header = () => {
+const Header = (props) => {
+  const {
+    sections
+  } = props;
+  const selectView = (ref) => {
+    ref.current.scrollIntoView({
+      behavior: 'smooth'
+    })
+  }
   const theme = useTheme();
   const classes = useStyles(theme)();
   return (
@@ -27,9 +35,11 @@ const Header = () => {
           justify="space-between"
           alignItems="center">
           <Grid item xs style={{textAlign:'right'}}>
-            <Button >About</Button>
-            <Button >Studies</Button>
-            <Button >Experience</Button>
+            {sections && Object.entries(sections).map(([key, section]) => (
+              <Button key={key} onClick={() => selectView(section.ref)} >
+                {section.buttonText}
+              </Button>
+            ))}
           </Grid>
         </Grid>
       </Toolbar>

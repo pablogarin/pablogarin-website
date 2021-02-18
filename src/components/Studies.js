@@ -4,7 +4,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 const Studies = () => {
   return (
-    <Grid item alignItems="top">
+    <Grid item xs={9}>
       <Box>
         <Typography variant="h4">
           Bachelor of Applied Science in Software Engineering

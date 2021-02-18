@@ -1,16 +1,21 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
-import {MuiThemeProvider} from '@material-ui/core/styles'
-import {makeStyles} from '@material-ui/core/styles'
+import { useRef } from 'react';
+import {
+  CssBaseline
+} from '@material-ui/core';
+import {
+  MuiThemeProvider,
+  makeStyles
+} from '@material-ui/core/styles';
 // Theme
-import theme from './theme'
+import theme from './theme';
 // Custom Components
-import About from './components/About'
-import Experience from './components/Experience'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import Section from './components/Section'
-import SideLinks from './components/SideLinks'
-import Studies from './components/Studies'
+import About from './components/About';
+import Experience from './components/Experience';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Sections from './components/Sections';
+import SideLinks from './components/SideLinks';
+import Studies from './components/Studies';
 
 const useStyles = makeStyles({
   aboutSection: {
@@ -21,19 +26,31 @@ const useStyles = makeStyles({
 
 const App = () => {
   const classes = useStyles();
+  const sections = {
+    'about': {
+      buttonText: 'About',
+      ref: useRef(null),
+      component: (<About />),
+      styles: classes.aboutSection,
+    },
+    'studies': {
+      title: 'Studies',
+      buttonText: 'Studies',
+      ref: useRef(null),
+      component: (<Studies />),
+    },
+    'experience': {
+      title: 'Job Experience',
+      buttonText: 'Experience',
+      ref: useRef(null),
+      component: (<Experience />),
+    }
+  }
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <Header></Header>
-      <Section className={classes.aboutSection}>
-        <About />
-      </Section>
-      <Section sectionTitle="Studies">
-        <Studies />
-      </Section>
-      <Section sectionTitle="Job Experience">
-        <Experience />
-      </Section>
+      <Header sections={sections} />
+      <Sections sections={sections} />
       <Footer />
       <SideLinks />
     </MuiThemeProvider>

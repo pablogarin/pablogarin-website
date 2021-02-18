@@ -5,7 +5,6 @@ import {
 
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -19,9 +18,8 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 const Experience = () => {
   const [experiences, setExperiences] = useState([]);
   useEffect(() => {
-    fetch('http://api.pablogarin.dev/experience').then((response) => {
+    fetch('https://api.pablogarin.dev/experience').then((response) => {
       response.json().then(({experiences}) => {
-        console.log(experiences);
         setExperiences(experiences)
       });
     })    
