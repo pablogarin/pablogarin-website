@@ -2,11 +2,12 @@ import {
   useState,
   useEffect
 } from 'react';
-
+import {makeStyles} from '@material-ui/core/styles';
 import {
-  Box,
+  Card,
+  CardHeader,
+  CardContent,
   Grid,
-  Paper,
   Typography,
 } from '@material-ui/core';
 import Timeline from '@material-ui/lab/Timeline';
@@ -19,6 +20,18 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 import ExperienceDate from './ExperienceDate';
+import JobDescription from './JobDescription';
+
+const useStyles = makeStyles((theme) => ({
+  jobDescription: {
+    padding: '0px 12px',
+    marginBottom: 30,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: -8,
+      marginLeft: -4
+    }
+  }
+}));
 
 const Experience = (props) => {
   const [experiences, setExperiences] = useState([]);
@@ -29,6 +42,7 @@ const Experience = (props) => {
       });
     });
   }, [])
+  const classes = useStyles();
   const {
     isMobile
   } = props;
@@ -43,12 +57,11 @@ const Experience = (props) => {
       <Timeline align={isMobile ? 'left' : 'alternate'}>
         {experiences.map((job, i) => (
           <TimelineItem key={job.id}>
-            <TimelineOppositeContent style={{flex: (isMobile ? 0 : 1)}}>
-              {!isMobile && (
+            <TimelineOppositeContent style={{flex: (isMobile ? 0.1 : 1)}}>
               <ExperienceDate
+                isMobile={isMobile}
                 startDate={job.startDate}
                 endDate={job.endDate} />
-              )}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineDot color="secondary">
@@ -57,19 +70,7 @@ const Experience = (props) => {
               {experiences.length > i+1 && (<TimelineConnector />)}
             </TimelineSeparator>
             <TimelineContent>
-              <Paper elevation={3} style={{padding: '6px 12px', marginBottom: 30}}>
-                <Typography variant="subtitle1" color="textPrimary">
-                  {job.jobTitle}
-                </Typography>
-                <Typography color="textSecondary">
-                  {job.companyName}
-                </Typography>
-                {isMobile && (
-                  <ExperienceDate
-                    startDate={job.startDate}
-                    endDate={job.endDate} />
-                )}
-              </Paper>
+              <JobDescription job={job}/>
             </TimelineContent>
           </TimelineItem>
         ))}

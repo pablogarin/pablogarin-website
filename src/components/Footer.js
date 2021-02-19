@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <>
       <Box className={classes.root} align="center">
-        <Typography>&copy; 2021</Typography>
+        <Typography>Pablo Garin &copy; 2021</Typography>
       </Box>
     </>
   )

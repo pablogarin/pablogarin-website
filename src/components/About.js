@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: '100vh',
     marginBottom: -56
+  },
+  downloadButton: {
+    color: theme.palette.secondary.light,
+    borderColor: theme.palette.secondary.light,
+    borderWidth: 2
   }
 }))
 
@@ -42,17 +47,17 @@ const About = (props) => {
             component="div"
             align="center"
             color="primary">
-              I'm a Senior Full-Stack Web Developer.
+              I'm a Full-Stack Web Developer.
           </Typography>
           <Box
             align="center"
             padding={5}>
             <Button
               startIcon={<DescriptionIcon />}
-              variant="contained"
+              variant="outlined"
               size={isMobile ? 'small' : 'large'}
-              color="secondary"
-              onClick={() => downloadResume()}>
+              onClick={() => downloadResume()}
+              className={classes.downloadButton}>
                 Download Resume
             </Button>
           </Box>

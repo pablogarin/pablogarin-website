@@ -24,7 +24,7 @@ const theme = createMuiTheme({
     },
     text: {
       primary: indigo[500],
-      secondary: '#AC3B61'
+      secondary: pink['A700']
     },
     background: {
       default: red[50]

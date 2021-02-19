@@ -22,15 +22,21 @@ import Header from './components/Header';
 import Sections from './components/Sections';
 import SideLinks from './components/SideLinks';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   aboutSection: {
     background: `linear-gradient(45deg, ${theme.palette.background.default}, ${theme.palette.secondary.light})`,
     backgroundImage: 'url("/res/images/background.jpg")',
     backgroundRepeat:'no-repeat',
-    backgroundSize: '120% auto',
-    minHeight: '100vh'
+    backgroundPosition: 'center',
+    minHeight: '100vh',
+    [theme.breakpoints.up("sm")]: {
+      backgroundSize: '120% auto',
+    },
+    [theme.breakpoints.down("sm")]: {
+      backgroundSize: 'auto 100%',
+    }
   }
-})
+}))
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -75,7 +81,7 @@ const App = () => {
         setActiveSection={setActiveSection}/>
       <Sections sections={sections} isMobile={isMobile}/>
       <Footer />
-      <SideLinks open={activeSection==="about"}/>
+      <SideLinks open={isMobile ? false : activeSection==="about"}/>
     </MuiThemeProvider>
   );
 }
