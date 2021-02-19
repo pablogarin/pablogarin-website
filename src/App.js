@@ -22,12 +22,17 @@ import Header from './components/Header';
 import Sections from './components/Sections';
 import SideLinks from './components/SideLinks';
 
+// Experimental
+import Particles from './components/common/Particles';
+
 const useStyles = makeStyles((theme) => ({
   aboutSection: {
-    background: `linear-gradient(45deg, ${theme.palette.background.default}, ${theme.palette.secondary.light})`,
+    background: `linear-gradient(0deg, ${theme.palette.primary.light}, ${theme.palette.background.default})`,
+    /*
     backgroundImage: 'url("/res/images/background.jpg")',
     backgroundRepeat:'no-repeat',
     backgroundPosition: 'center',
+    */
     minHeight: '100vh',
     [theme.breakpoints.up("sm")]: {
       backgroundSize: '120% auto',
@@ -79,6 +84,7 @@ const App = () => {
         isMobile={isMobile}
         activeSection={activeSection}
         setActiveSection={setActiveSection}/>
+      <Particles amount={isMobile ? 40 : 100}/>
       <Sections sections={sections} isMobile={isMobile}/>
       <Footer />
       <SideLinks open={isMobile ? false : activeSection==="about"}/>
