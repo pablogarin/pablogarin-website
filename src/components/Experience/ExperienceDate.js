@@ -9,7 +9,7 @@ import FormattedDate from '../common/FormattedDate';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: 10,
+    paddingTop: 8,
     marginLeft: -4,
     marginRight: -4
   },

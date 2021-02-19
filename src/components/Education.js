@@ -19,7 +19,7 @@ import FormattedDate from './common/FormattedDate';
 
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
-    background: theme.palette.background.default
+    background: theme.palette.secondary.light
   },
   cardAvatar: {
     backgroundColor: theme.palette.primary.main
@@ -72,6 +72,7 @@ const Education = (props) => {
       style={{margin:'16px 0'}}>
         {degrees.map(degree => (
           <Grid
+            key={degree.name}
             item
             xs={9}
             md={3}>
@@ -108,7 +109,7 @@ const Education = (props) => {
                     />
                   </ListItem>
                   {degree.achievements.map(achievement => (
-                    <ListItem>
+                    <ListItem key={achievement}>
                       <ListItemIcon>
                         <CheckCircleIcon color="secondary"/>
                       </ListItemIcon>

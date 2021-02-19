@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     transform: 'translateZ(0px)',
     flexGrow: 1,
     bottom: 0,
-    left: 0
+    left: 0,
+    zIndex: 1002,
   },
   speedDial: {
     position: 'absolute',

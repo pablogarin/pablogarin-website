@@ -11,7 +11,9 @@ import DescriptionIcon from '@material-ui/icons/Description';
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: '100vh',
-    marginBottom: -56
+    marginBottom: -56,
+    position: 'relative',
+    zIndex: 1001,
   },
   downloadButton: {
     color: theme.palette.secondary.light,
@@ -40,7 +42,7 @@ const About = (props) => {
             variant={isMobile ? 'h2' : 'h1'}
             component="h1"
             align="center">
-              Hi! I'm <Typography variant="span" color="secondary" style={{fontWeight: 500}}>Pablo Garin!</Typography>
+              Hi! I'm <Typography variant="h1" component="span" color="secondary" style={{fontWeight: 500}}>Pablo Garin!</Typography>
           </Typography>
           <Typography
             variant={isMobile ? 'h4' : 'h3'}

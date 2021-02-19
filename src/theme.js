@@ -14,11 +14,12 @@ const theme = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
+      light: indigo[100],
       main: indigo[500],
       contrastText: grey[50]
     },
     secondary: {
-      light: pink[100],
+      light: pink[50],
       main: pink['A700'],
       contrastText: grey[50]
     },
@@ -27,7 +28,7 @@ const theme = createMuiTheme({
       secondary: pink['A700']
     },
     background: {
-      default: red[50]
+      default: grey[50]
     }
   },
   typography: {
