@@ -55,7 +55,7 @@ const About = (props) => {
             <Button
               startIcon={<DescriptionIcon />}
               variant="outlined"
-              size={isMobile ? 'small' : 'large'}
+              size={isMobile ? 'medium' : 'large'}
               onClick={() => downloadResume()}
               className={classes.downloadButton}>
                 Download Resume
