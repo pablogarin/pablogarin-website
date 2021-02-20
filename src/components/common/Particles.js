@@ -1,7 +1,6 @@
 import {
   useRef,
   useEffect,
-  useState,
 } from 'react';
 import {
   colorHexToObject,
@@ -9,7 +8,10 @@ import {
   animate
 } from './canvasHelper';
 
-import {useTheme} from '@material-ui/core/styles';
+import {
+  useTheme,
+  makeStyles
+} from '@material-ui/core/styles';
 
 const createRandomParticle = (color, radius) => {
   const size = radius ? radius : Math.random() * 0.5 + 1;
@@ -29,11 +31,22 @@ const createRandomParticle = (color, radius) => {
   }
 }
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position:'absolute',
+    top:0,
+    left:0,
+    width: '100%',
+    height: '100%',
+  }
+}));
+
 const Particles = (props) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const theme = useTheme();
   const { amount } = props;
+  const classes = useStyles();
   useEffect(() => {
     // Canvas setup
     const canvas = canvasRef.current;
@@ -130,13 +143,7 @@ const Particles = (props) => {
   return (
     <canvas
       ref={canvasRef}
-      style={{
-        position:'absolute',
-        top:0,
-        left:0,
-        width: '100%',
-        height: '100%'
-      }}
+      className={classes.root}
     />
   )
 }
