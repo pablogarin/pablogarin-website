@@ -12,9 +12,11 @@ import {makeStyles} from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   active: {
     backgroundColor: 'transparent',
-    borderBottomWidth: 2,
-    borderBottomColor: theme.palette.primary.main,
-    borderBottomStyle: 'solid'
+    [theme.breakpoints.up("sm")]: {
+      borderBottomWidth: 2,
+      borderBottomColor: theme.palette.primary.main,
+      borderBottomStyle: 'solid'
+    }
   },
   horizontal: {
     display: 'flex',

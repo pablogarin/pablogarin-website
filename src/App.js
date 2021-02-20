@@ -67,6 +67,7 @@ const App = () => {
       styles: classes.homeSection,
     },
     'about': {
+      title: 'About Me',
       buttonText: 'About',
       ref: useRef(null),
       component: (<About />),
