@@ -19,6 +19,7 @@ import Education from './components/Education';
 import Experience from './components/Experience';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import Home from './components/Home';
 import Sections from './components/Sections';
 import SideLinks from './components/SideLinks';
 
@@ -26,7 +27,7 @@ import SideLinks from './components/SideLinks';
 import Particles from './components/common/Particles';
 
 const useStyles = makeStyles((theme) => ({
-  aboutSection: {
+  homeSection: {
     background: `linear-gradient(0deg, ${theme.palette.primary.light}, ${theme.palette.background.default})`,
     /*
     backgroundImage: 'url("/res/images/background.jpg")',
@@ -40,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       backgroundSize: 'auto 100%',
     }
+  },
+  aboutSection: {
   }
 }))
 
@@ -57,6 +60,12 @@ const App = () => {
     setResponsiveness();
   }, []);
   const sections = {
+    'home': {
+      buttonText: 'Home',
+      ref: useRef(null),
+      component: (<Home />),
+      styles: classes.homeSection,
+    },
     'about': {
       buttonText: 'About',
       ref: useRef(null),
@@ -87,7 +96,7 @@ const App = () => {
       <Particles amount={isMobile ? 40 : 100}/>
       <Sections sections={sections} isMobile={isMobile}/>
       <Footer />
-      <SideLinks open={isMobile ? false : activeSection==="about"}/>
+      <SideLinks open={isMobile ? false : activeSection==="home"}/>
     </MuiThemeProvider>
   );
 }
