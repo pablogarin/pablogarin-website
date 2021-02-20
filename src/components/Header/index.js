@@ -4,8 +4,6 @@ import {
 } from 'react';
 import {
   AppBar,
-  Box,
-  Drawer,
   Grid,
   IconButton,
   Toolbar,
@@ -21,9 +19,13 @@ import SectionsMenu from './SectionsMenu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: 'transparent',
+    background: theme.palette.background.default,
     boxShadow: 'none',
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
+    transition: '.3s'
+  },
+  hidden: {
+    background: 'transparent',
   },
   menuButton: {
     position: 'absolute',
@@ -37,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = (props) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [showBar, setShowBar] = useState(false);
   const classes = useStyles();
   const theme = useTheme();
   const {
@@ -54,8 +57,9 @@ const Header = (props) => {
         currActiveSection = key
       }
     }
+    setShowBar(currActiveSection !== 'home');
     setActiveSection(currActiveSection);
-  }, [scrollPosition, sections, setActiveSection]);
+  }, [scrollPosition, sections, setActiveSection, setShowBar]);
   // Local functions
   const selectView = (ref) => {
     const scrollPromise = new Promise((resolve, reject) => {
@@ -73,22 +77,21 @@ const Header = (props) => {
     scrollPromise.then(() => {
       if (menuOpen) setMenuOpen(false);
     });
-  }
+  };
   const menuHandler = () => {
     setMenuOpen(!menuOpen);
-  }
+  };
   window.addEventListener('scroll', (evt) => {
     setScrollPosition(window.pageYOffset+10);
-  })
+  });
   const transitionConfig = {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen,
-  }
+  };
   return (
-    <AppBar className={classes.root}>
+    <AppBar className={[classes.root, (!showBar || isMobile ? classes.hidden : '')].join(' ')}>
       <Toolbar align="right">
-        {isMobile
-        ? (
+        {isMobile && (
           <>
             <IconButton
               edge="end"
@@ -116,32 +119,22 @@ const Header = (props) => {
                     <CloseIcon className={classes.menuButtonIcon} />
                 </Zoom>
             </IconButton>
-            <Drawer
-              anchor="right"
-              open={menuOpen}
-              onClose={menuHandler}
-              >
-                <Box style={{height:56, width: 200}} />
-                <SectionsMenu
-                    activeSection={activeSection}
-                    sections={sections}
-                    selectView={selectView}/>
-            </Drawer>
           </>
-        ) : (
-          <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center">
-            <Grid item xs style={{textAlign:'right'}}>
-              <SectionsMenu
-                activeSection={activeSection}
-                sections={sections}
-                selectView={selectView}/>
-            </Grid>
-          </Grid>
         )}
+        <Grid
+          container
+          direction="row"
+          justify="flex-end"
+          alignItems="center">
+          <Grid item md={5} style={{textAlign:'right'}}>
+            <SectionsMenu
+              activeSection={activeSection}
+              isMobile={isMobile}
+              sections={sections}
+              selectView={selectView}
+              open={isMobile ? menuOpen : true}/>
+          </Grid>
+        </Grid>
       </Toolbar>
     </AppBar>
   )

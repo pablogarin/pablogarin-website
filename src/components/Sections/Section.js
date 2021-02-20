@@ -23,7 +23,7 @@ const Section = forwardRef((props, ref) => {
         alignItems="flex-start"
         style={{
           minHeight: '100vh',
-          paddingTop: 56
+          paddingTop: 70
         }}
         className={className}
         ref={ref}>
