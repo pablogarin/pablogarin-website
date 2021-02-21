@@ -4,23 +4,12 @@ import {
 } from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {
-  Card,
-  CardHeader,
-  CardContent,
   Grid,
-  Typography,
+  Slide,
 } from '@material-ui/core';
 import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
-import ExperienceDate from './ExperienceDate';
-import JobDescription from './JobDescription';
+import TimelineElement from './TimelineElement'
 
 const useStyles = makeStyles((theme) => ({
   jobDescription: {
@@ -44,8 +33,13 @@ const Experience = (props) => {
   }, [])
   const classes = useStyles();
   const {
-    isMobile
+    isMobile,
+    scrollPosition
   } = props;
+  const checkPosition = (element) => {
+    console.log(element)
+    return true;
+  };
   return (
     <Grid
       item
@@ -56,23 +50,13 @@ const Experience = (props) => {
       md={6}>
       <Timeline align={isMobile ? 'left' : 'alternate'}>
         {experiences.map((job, i) => (
-          <TimelineItem key={job.id}>
-            <TimelineOppositeContent style={{flex: (isMobile ? 0.1 : 1)}}>
-              <ExperienceDate
-                isMobile={isMobile}
-                startDate={job.startDate}
-                endDate={job.endDate} />
-            </TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot color="secondary">
-                <CalendarTodayIcon />
-              </TimelineDot>
-              {experiences.length > i+1 && (<TimelineConnector />)}
-            </TimelineSeparator>
-            <TimelineContent>
-              <JobDescription job={job}/>
-            </TimelineContent>
-          </TimelineItem>
+          <TimelineElement
+            job={job}
+            odd={i%2 !== 0}
+            scrollPosition={scrollPosition}
+            key={job.id}
+            isLast={experiences.length - 1 === i}
+          />
         ))}
       </Timeline>
     </Grid>

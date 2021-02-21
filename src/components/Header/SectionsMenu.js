@@ -4,6 +4,7 @@ import {
   Collapse,
   List,
   ListItem,
+  Paper,
   Typography
 } from '@material-ui/core'
 
@@ -24,12 +25,16 @@ const useStyles = makeStyles((theme) => ({
   },
   mobile: {
     position: 'absolute',
-    top: 40,
-    right: 0,
+    top: theme.spacing(6),
+    right: theme.spacing(1),
     /*
     display: 'flex',
     flexDirection: 'column',
     */
+  },
+  menuDesktop: {
+    background: 'transparent',
+    boxShadow: 'none'
   }
 }));
 
@@ -45,26 +50,28 @@ const SectionsMenu = (props) => {
   return (
     <Box className={isMobile ? classes.mobile : ''}>
       <Collapse in={open} collapsedHeight={0}>
-        <List
-          className={!isMobile ? classes.horizontal : ''}>
-        {sections && Object.entries(sections).map(([key, section]) => (
-          <ListItem
-            key={key}
-            style={{
-              justifyContent: (!isMobile ? 'center' : 'flex-end')
-            }}
-            className={key === activeSection ? classes.active : null}>
-              <Button
-                onClick={() => selectView(section.ref)}
-                size="large">
-                <Typography
-                  color="secondary">
-                    {section.buttonText}
-                  </Typography>
-              </Button>
-          </ListItem>
-        ))}
-        </List>
+        <Paper className={!isMobile ? classes.menuDesktop : ''}>
+          <List
+            className={!isMobile ? classes.horizontal : ''}>
+          {sections && Object.entries(sections).map(([key, section]) => (
+            <ListItem
+              key={key}
+              style={{
+                justifyContent: 'center',
+              }}
+              className={key === activeSection ? classes.active : null}>
+                <Button
+                  onClick={() => selectView(section.ref)}
+                  size="large">
+                  <Typography
+                    color="secondary">
+                      {section.buttonText}
+                    </Typography>
+                </Button>
+            </ListItem>
+          ))}
+          </List>
+        </Paper>
       </Collapse>
     </Box>
   )

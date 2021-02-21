@@ -1,10 +1,21 @@
-import React from 'react';
+import {
+  useEffect,
+  useState
+} from 'react';
 import Section from './Section'
 
 const Sections = (props) => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  useEffect(() => {
+    const getScrollPositionFromEvent = () => {
+      setScrollPosition(window.pageYOffset)
+    };
+    window.addEventListener('scroll', getScrollPositionFromEvent)
+  }, [setScrollPosition]);
   const {
+    activeSection,
     isMobile,
-    sections
+    sections,
   } = props;
   return (
     <>
@@ -14,7 +25,9 @@ const Sections = (props) => {
           ref={section.ref}
           sectionTitle={section.title}
           isMobile={isMobile}
-          className={section.styles}>
+          className={section.styles}
+          active={activeSection === key}
+          scrollPosition={scrollPosition}>
             {section.component}
         </Section>
       ))}

@@ -1,4 +1,10 @@
 import {
+  useEffect,
+  useRef,
+  useState
+} from 'react';
+
+import {
   Avatar,
   Card,
   CardContent,
@@ -13,29 +19,57 @@ import {
 } from '@material-ui/core';
 import CodeIcon from '@material-ui/icons/Code';
 
+import CompletionBar from './common/CompletionBar';
+
 const About = (props) => {
+  const container = useRef(null);
+  const [showContent, setShowContent] = useState(false);
   const {
-    isMobile
+    isMobile,
+    scrollPosition
   } = props;
+  useEffect(() => {
+    if (!showContent && scrollPosition > container.current.offsetTop-window.innerHeight/1.3) {
+      setShowContent(true);
+    }
+  }, [showContent, scrollPosition]);
   const skillSet = [
     {
       avatar: "JS",
       name: 'JavaScrip',
-      proficiency: 'Professional'
+      proficiency: 'Professional',
+      progress: 0.95
     },
     {
       avatar: "PY",
       name: 'Python',
-      proficiency: 'Professional'
+      proficiency: 'Professional',
+      progress: 0.95
     },
     {
+      avatar: 'H5',
       name: 'HTML5',
-      proficiency: 'Professional'
+      proficiency: 'Professional',
+      progress: 0.98
     },
     {
+      avatar: 'C3',
       name: 'CSS3',
-      proficiency: 'Professional'
-    }
+      proficiency: 'Professional',
+      progress: 0.98
+    },
+    {
+      avatar: 'N',
+      name: 'NodeJS',
+      proficiency: 'Professional',
+      progress: 0.95
+    },
+    {
+      avatar: 'R',
+      name: 'ReactJS',
+      proficiency: 'Professional',
+      progress: 0.90
+    },
   ]
   return (
     <Grid
@@ -81,25 +115,34 @@ const About = (props) => {
               </Card>
             </Grid>
         </Grid>
-        <Grid item md={6} justify="center">
-          <Typography variant="h4">
-            Core Skills
-          </Typography>
-          <List>
-            {skillSet.map(skill => (
-              <ListItem key={skill.name}>
-                <ListItemAvatar>
-                    <Avatar>
-                      {skill.avatar ? skill.avatar : <CodeIcon />}
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={skill.name}
-                  secondary={skill.proficiency}
-                />
-              </ListItem>
-            ))}
-          </List>
+        <Grid container item md={6} justify="center" ref={container}>
+          <Grid item xs={9}>
+            <Typography variant="h4">
+              Core Skills
+            </Typography>
+            <List>
+              {skillSet.map(skill => (
+                <ListItem key={skill.name}>
+                  <ListItemAvatar>
+                      <Avatar>
+                        {skill.avatar ? skill.avatar : <CodeIcon />}
+                      </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={skill.name}
+                    secondary={skill.proficiency}
+                  />
+                  <CompletionBar
+                    width={300}
+                    height={20}
+                    percentage
+                    value={skill.progress}
+                    in={showContent}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Grid>
         </Grid>
     </Grid>
   )

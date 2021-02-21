@@ -49,6 +49,11 @@ const Header = (props) => {
     sections,
   } = props;
   useEffect(() => {
+    window.addEventListener('scroll', (evt) => {
+      setScrollPosition(window.pageYOffset+70);
+    });
+  }, [setScrollPosition]);
+  useEffect(() => {
     let currActiveSection = null;
     for(let key in sections) {
       sections[key].isActive = false;
@@ -81,9 +86,6 @@ const Header = (props) => {
   const menuHandler = () => {
     setMenuOpen(!menuOpen);
   };
-  window.addEventListener('scroll', (evt) => {
-    setScrollPosition(window.pageYOffset+10);
-  });
   const transitionConfig = {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen,

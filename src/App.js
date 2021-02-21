@@ -95,7 +95,10 @@ const App = () => {
         activeSection={activeSection}
         setActiveSection={setActiveSection}/>
       <Particles amount={isMobile ? 40 : 100}/>
-      <Sections sections={sections} isMobile={isMobile}/>
+      <Sections
+        sections={sections}
+        isMobile={isMobile}
+        activeSection={activeSection}/>
       <Footer />
       <SideLinks open={isMobile ? false : activeSection==="home"}/>
     </MuiThemeProvider>
