@@ -1,17 +1,7 @@
-import {
-  useEffect,
-  useState
-} from 'react';
+import React from 'react';
 import Section from './Section'
 
 const Sections = (props) => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  useEffect(() => {
-    const getScrollPositionFromEvent = () => {
-      setScrollPosition(window.pageYOffset)
-    };
-    window.addEventListener('scroll', getScrollPositionFromEvent)
-  }, [setScrollPosition]);
   const {
     activeSection,
     isMobile,
@@ -27,7 +17,7 @@ const Sections = (props) => {
           isMobile={isMobile}
           className={section.styles}
           active={activeSection === key}
-          scrollPosition={scrollPosition}>
+        >
             {section.component}
         </Section>
       ))}

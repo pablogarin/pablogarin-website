@@ -1,4 +1,4 @@
-import {
+import React, {
   useEffect,
   useRef,
   useState
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   percentageText: {
     position: 'absolute',
+    color: theme.palette.secondary.main,
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)'

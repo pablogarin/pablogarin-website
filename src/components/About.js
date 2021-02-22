@@ -1,5 +1,4 @@
-import {
-  useEffect,
+import React, {
   useRef,
   useState
 } from 'react';
@@ -15,80 +14,96 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Slide,
   Typography
 } from '@material-ui/core';
 import CodeIcon from '@material-ui/icons/Code';
+import {
+  DiJsBadge,
+  DiPython,
+  DiHtml5,
+  DiCss3,
+  DiNodejsSmall,
+  DiReact
+} from "react-icons/di";
 
 import CompletionBar from './common/CompletionBar';
+import useScrollYPosition from '../hooks/useScrollYPosition';
 
 const About = (props) => {
   const container = useRef(null);
-  const [showContent, setShowContent] = useState(false);
+  const [showSkills, setShowSkills] = useState(false);
   const {
-    isMobile,
-    scrollPosition
+    isMobile
   } = props;
-  useEffect(() => {
-    if (!showContent && scrollPosition > container.current.offsetTop-window.innerHeight/1.3) {
-      setShowContent(true);
+  useScrollYPosition((position) => {
+    if (position > container.current.offsetTop-window.innerHeight/2.5) {
+      setShowSkills(true);
     }
-  }, [showContent, scrollPosition]);
+  });
   const skillSet = [
     {
-      avatar: "JS",
+      avatar: (<DiJsBadge />),
       name: 'JavaScrip',
       proficiency: 'Professional',
       progress: 0.95
     },
     {
-      avatar: "PY",
+      avatar: (<DiPython />),
       name: 'Python',
       proficiency: 'Professional',
       progress: 0.95
     },
     {
-      avatar: 'H5',
+      avatar: (<DiHtml5 />),
       name: 'HTML5',
       proficiency: 'Professional',
       progress: 0.98
     },
     {
-      avatar: 'C3',
+      avatar: (<DiCss3 />),
       name: 'CSS3',
       proficiency: 'Professional',
       progress: 0.98
     },
     {
-      avatar: 'N',
+      avatar: (<DiNodejsSmall />),
       name: 'NodeJS',
       proficiency: 'Professional',
       progress: 0.95
     },
     {
-      avatar: 'R',
+      avatar: (<DiReact />),
       name: 'ReactJS',
       proficiency: 'Professional',
       progress: 0.90
     },
   ]
   return (
-    <Grid
-      item
-      container
-      alignItems="center"
-      justify="space-between"
-      direction="row"
-      style={{
-        minHeight: '100vh',
-        marginTop: (isMobile ? 'inherit' : -56),
-        marginBottom: (isMobile ? 'inherit' : -56),
-      }}>
-        <Grid
-          item
-          container
-          alignItems="center"
-          justify="center"
-          md={6}>
+    <Slide
+      direction="right"
+      in={showSkills}
+      appear={true}
+    >
+      <Grid
+        item
+        container
+        alignItems="center"
+        justify="space-between"
+        direction="row"
+        ref={container}
+        style={{
+          minHeight: '100vh',
+          marginTop: (isMobile ? 'inherit' : -56),
+          marginBottom: (isMobile ? 'inherit' : -56),
+        }}>
+          <Grid
+            item
+            container
+            alignItems="center"
+            justify="center"
+            md={6}
+          >
             <Grid item md={9}>
               <Card variant="outlined" style={{
                 border: 'none',
@@ -114,8 +129,8 @@ const About = (props) => {
                 </CardContent>
               </Card>
             </Grid>
-        </Grid>
-        <Grid container item md={6} justify="center" ref={container}>
+          </Grid>
+        <Grid container item md={6} justify="flex-start">
           <Grid item xs={9}>
             <Typography variant="h4">
               Core Skills
@@ -137,14 +152,15 @@ const About = (props) => {
                     height={20}
                     percentage
                     value={skill.progress}
-                    in={showContent}
+                    in={showSkills}
                   />
                 </ListItem>
               ))}
             </List>
           </Grid>
         </Grid>
-    </Grid>
+      </Grid>
+    </Slide>
   )
 }
 

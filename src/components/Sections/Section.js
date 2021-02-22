@@ -1,4 +1,4 @@
-import {
+import React, {
   forwardRef,
   cloneElement,
   Children,
@@ -20,16 +20,27 @@ const Section = forwardRef((props, ref) => {
     className,
     children,
     isMobile,
-    scrollPosition,
     sectionTitle
   } = props;
   useEffect(() => {
-    if (scrollPosition > ref.current.offsetTop-(window.innerHeight/1.3)) {
-      setShowTitle(true);
-    }
-  }, [scrollPosition, ref])
+    window.addEventListener('scroll', (evt) => {
+      const scrollPosition = window.pageYOffset;
+      if (scrollPosition > ref.current.offsetTop-(window.innerHeight/1.3)) {
+        setShowTitle(true);
+      }
+    });
+  }, [ref])
   console.log()
-  const childrenWithProps = Children.map(children, c => cloneElement(c, {active, isMobile, scrollPosition}));
+  const childrenWithProps = Children.map(
+    children,
+    (c) => cloneElement(
+      c,
+      {
+        active,
+        isMobile
+      }
+    )
+  );
   return (
     <>
       <Grid

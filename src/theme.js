@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-import {red, indigo, grey, pink} from '@material-ui/core/colors'
+import {indigo, grey, pink} from '@material-ui/core/colors'
 
 /** 
  * COLOR SCHEME

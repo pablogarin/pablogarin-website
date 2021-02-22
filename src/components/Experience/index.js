@@ -1,16 +1,16 @@
-import {
+import React, {
   useState,
   useEffect
 } from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+// import {makeStyles} from '@material-ui/core/styles';
 import {
   Grid,
-  Slide,
 } from '@material-ui/core';
 import Timeline from '@material-ui/lab/Timeline';
 
 import TimelineElement from './TimelineElement'
 
+/*
 const useStyles = makeStyles((theme) => ({
   jobDescription: {
     padding: '0px 12px',
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
+*/
 
 const Experience = (props) => {
   const [experiences, setExperiences] = useState([]);
@@ -31,15 +32,10 @@ const Experience = (props) => {
       });
     });
   }, [])
-  const classes = useStyles();
+  // const classes = useStyles();
   const {
     isMobile,
-    scrollPosition
   } = props;
-  const checkPosition = (element) => {
-    console.log(element)
-    return true;
-  };
   return (
     <Grid
       item
@@ -53,7 +49,6 @@ const Experience = (props) => {
           <TimelineElement
             job={job}
             odd={i%2 !== 0}
-            scrollPosition={scrollPosition}
             key={job.id}
             isLast={experiences.length - 1 === i}
           />
