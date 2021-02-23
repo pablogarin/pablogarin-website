@@ -1,6 +1,5 @@
 import React, {
   useState,
-  useEffect
 } from 'react';
 import {
   AppBar,
@@ -16,6 +15,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import SectionsMenu from './SectionsMenu';
+import useScrollYPosition from '../../hooks/useScrollYPosition';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,33 +38,27 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [showBar, setShowBar] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const classes = useStyles();
   const theme = useTheme();
   const {
-    activeSection,
     isMobile,
-    setActiveSection,
     sections,
   } = props;
-  useEffect(() => {
-    window.addEventListener('scroll', (evt) => {
-      setScrollPosition(window.pageYOffset+70);
-    });
-  }, [setScrollPosition]);
-  useEffect(() => {
+  useScrollYPosition((position) => {
     let currActiveSection = null;
     for(let key in sections) {
       sections[key].isActive = false;
       const currSection = sections[key];
-      if (currSection.ref.current.offsetTop <= scrollPosition || currActiveSection === null) {
+      if (currSection.ref.current.offsetTop <= position+70 || currActiveSection === null) {
         currActiveSection = key
       }
     }
+    if (activeSection === currActiveSection) return;
     setShowBar(currActiveSection !== 'home');
     setActiveSection(currActiveSection);
-  }, [scrollPosition, sections, setActiveSection, setShowBar]);
+  });
   // Local functions
   const selectView = (ref) => {
     const scrollPromise = new Promise((resolve, reject) => {

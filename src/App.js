@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [activeSection, setActiveSection] = useState(null);
   const classes = useStyles();
   useEffect(() => {
     const setResponsiveness = () => {
@@ -91,16 +90,13 @@ const App = () => {
       <CssBaseline />
       <Header
         sections={sections}
-        isMobile={isMobile}
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}/>
+        isMobile={isMobile}/>
       <Particles amount={isMobile ? 40 : 100}/>
       <Sections
         sections={sections}
-        isMobile={isMobile}
-        activeSection={activeSection}/>
+        isMobile={isMobile}/>
       <Footer />
-      <SideLinks open={isMobile ? false : activeSection==="home"}/>
+      <SideLinks open={false}/>
     </MuiThemeProvider>
   );
 }

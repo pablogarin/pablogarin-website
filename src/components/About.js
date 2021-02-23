@@ -37,7 +37,9 @@ const About = (props) => {
     isMobile
   } = props;
   useScrollYPosition((position) => {
-    if (position > container.current.offsetTop-window.innerHeight/2.5) {
+    const content = container.current;
+    if (!content) return;
+    if (position > content.offsetTop-window.innerHeight/5) {
       setShowSkills(true);
     }
   });

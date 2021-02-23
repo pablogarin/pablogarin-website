@@ -1,12 +1,16 @@
 import React from 'react';
+
 import Section from './Section'
 
 const Sections = (props) => {
   const {
-    activeSection,
     isMobile,
     sections,
   } = props;
+  let count = 0;
+  const getCount = () => {
+    return count++;
+  }
   return (
     <>
       {sections && Object.entries(sections).map(([key, section]) => (
@@ -15,8 +19,8 @@ const Sections = (props) => {
           ref={section.ref}
           sectionTitle={section.title}
           isMobile={isMobile}
+          parity={getCount() % 2 === 0 ? 'even' : 'odd'}
           className={section.styles}
-          active={activeSection === key}
         >
             {section.component}
         </Section>

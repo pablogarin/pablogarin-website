@@ -43,7 +43,11 @@ const Experience = (props) => {
       direction="row"
       justify="flex-start"
       xs={10}
-      md={6}>
+      md={6}
+      style={{
+        overflowX: 'hidden',
+      }}
+    >
       <Timeline align={isMobile ? 'left' : 'alternate'}>
         {experiences.map((job, i) => (
           <TimelineElement

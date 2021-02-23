@@ -3,7 +3,6 @@ import React, {
   cloneElement,
   Children,
   useState,
-  useEffect,
 } from 'react';
 import {
   Grid,
@@ -11,32 +10,32 @@ import {
   Slide,
   Typography
 } from '@material-ui/core';
+import SectionBackground from './SectionBackground';
+import useScrollYPosition from '../../hooks/useScrollYPosition';
 
 
 const Section = forwardRef((props, ref) => {
   const [showTitle, setShowTitle] = useState(false);
   const {
-    active,
     className,
     children,
     isMobile,
-    sectionTitle
+    sectionTitle,
+    parity,
   } = props;
-  useEffect(() => {
-    window.addEventListener('scroll', (evt) => {
-      const scrollPosition = window.pageYOffset;
-      if (scrollPosition > ref.current.offsetTop-(window.innerHeight/1.3)) {
-        setShowTitle(true);
-      }
-    });
-  }, [ref])
-  console.log()
+  console.log(parity)
+  useScrollYPosition((position) => {
+    if (!ref.current) return;
+    const scrollPosition = window.pageYOffset;
+    if (scrollPosition > ref.current.offsetTop-(window.innerHeight/1.8)) {
+      setShowTitle(true);
+    }
+  });
   const childrenWithProps = Children.map(
     children,
     (c) => cloneElement(
       c,
       {
-        active,
         isMobile
       }
     )
@@ -50,7 +49,7 @@ const Section = forwardRef((props, ref) => {
         alignItems="flex-start"
         style={{
           minHeight: '100vh',
-          paddingTop: 70
+          paddingTop: 70,
         }}
         className={className}
         ref={ref}>
@@ -68,6 +67,7 @@ const Section = forwardRef((props, ref) => {
             container
             direction="row"
             justify="center">
+              <SectionBackground parity={parity} />
               {childrenWithProps}
           </Grid>
       </Grid>
