@@ -107,7 +107,7 @@ const About = (props) => {
             md={6}
           >
             <Grid item md={9}>
-              <Card variant="outlined" style={{
+              <Card style={{
                 border: 'none',
               }}>
                 <CardMedia

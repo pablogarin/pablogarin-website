@@ -112,7 +112,7 @@ const Particles = (props) => {
       const canvas = canvasRef.current
       const context = contextRef.current
       const maxDistance = (canvas.width/Math.ceil(amount/15)) * (canvas.height/Math.ceil(amount/15))
-      const lineColor = colorHexToObject(theme.palette.secondary.main);
+      const lineColor = colorHexToObject('#086972');
       for (let i = 0; i < particles.length; i++) {
         for (let j = i+1; j < particles.length; j++) {
           const xd = particles[i].x - particles[j].x;

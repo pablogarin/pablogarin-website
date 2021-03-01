@@ -20,7 +20,7 @@ import FormattedDate from './common/FormattedDate';
 
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
-    background: theme.palette.secondary.light
+    background: 'rgba(60,60,60,0.15)'
   },
   cardAvatar: {
     backgroundColor: theme.palette.primary.main

@@ -28,8 +28,8 @@ import Particles from './components/common/Particles';
 
 const useStyles = makeStyles((theme) => ({
   homeSection: {
-    background: `linear-gradient(0deg, ${theme.palette.primary.light}, ${theme.palette.background.default})`,
     /*
+    backgroundColor: theme.palette.primary.dark,
     backgroundImage: 'url("/res/images/background.jpg")',
     backgroundRepeat:'no-repeat',
     backgroundPosition: 'center',

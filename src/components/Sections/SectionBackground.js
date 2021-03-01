@@ -17,11 +17,6 @@ const useStyles = makeStyles((theme) => ({
   },
   odd: {
     backgroundColor: 'rgba(230,230,230,0.75)',
-    width: '120vw',
-    height: 400,
-    transformOrigin: 'center',
-    transform: 'translateX(-10vw) rotate3d(0, 0, 1, 5deg)',
-    marginTop: 60
   }
 }));
 

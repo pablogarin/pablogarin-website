@@ -1,34 +1,30 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import {indigo, grey, pink} from '@material-ui/core/colors'
 
-/** 
- * COLOR SCHEME
- * BG: #EDC7B7
- * BG-SEC: #EEE2DC
- * SHADE: #BAB2B5
- * PRIMARY: #123C69
- * SECONDARY: #AC3B61
+/**
+ * #a7ff83
+ * #17b978
+ * #086972
+ * #071a52
  */
 
 const theme = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
-      light: indigo[100],
-      main: indigo[500],
+      main: '#17b978',
       contrastText: grey[50]
     },
     secondary: {
-      light: pink[50],
-      main: pink['A700'],
+      main: '#a7ff83',
       contrastText: grey[50]
     },
     text: {
-      primary: indigo[500],
-      secondary: pink['A700']
+      primary: '#efefef',
+      secondary: '#17b978'
     },
     background: {
-      default: grey[50]
+      default: '#071A52'
     }
   },
   typography: {
