@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1001,
   },
   downloadButton: {
-    color: theme.palette.secondary.light,
-    borderColor: theme.palette.secondary.light,
+    color: theme.palette.text.primary,
+    borderColor: theme.palette.text.primary,
     borderWidth: 2
   }
 }))
@@ -42,15 +42,19 @@ const Home = (props) => {
           <Typography
             variant={isMobile ? 'h2' : 'h1'}
             component="h1"
-            align="center">
-              Hi! I'm <Typography variant="h1" component="span" color="secondary" style={{fontWeight: 500}}>Pablo Garin!</Typography>
+            align="center"
+            style={{
+              weight: '100'
+            }}
+          >
+            Hi! I'm <Typography variant="h1" component="span" color="secondary" style={{fontWeight: 500}}>Pablo Garin!</Typography>
           </Typography>
           <Typography
             variant={isMobile ? 'h4' : 'h3'}
             component="div"
             align="center"
-            color="primary">
-              I'm a Full-Stack Web Developer.
+            color="white">
+              A Full-Stack Web Developer.
           </Typography>
           <Box
             align="center"
@@ -61,7 +65,7 @@ const Home = (props) => {
               size={isMobile ? 'medium' : 'large'}
               onClick={() => downloadResume()}
               className={classes.downloadButton}>
-                Download Resume
+                KNOW ME BETTER
             </Button>
           </Box>
         </Grid>

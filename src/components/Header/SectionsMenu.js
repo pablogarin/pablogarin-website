@@ -65,7 +65,7 @@ const SectionsMenu = (props) => {
                   onClick={() => selectView(section.ref)}
                   size="large">
                   <Typography
-                    color="secondary">
+                    color="white">
                       {section.buttonText}
                     </Typography>
                 </Button>
