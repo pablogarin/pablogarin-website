@@ -5,6 +5,7 @@ import React, {
 
 import {
   Avatar,
+  Box,
   Grid,
   List,
   ListItem,
@@ -60,7 +61,7 @@ const About = (props) => {
   const skillSet = [
     {
       avatar: (<DiJsBadge />),
-      name: 'JavaScrip',
+      name: 'JavaScript',
       proficiency: 'Professional',
       progress: 0.95
     },
@@ -145,31 +146,24 @@ const About = (props) => {
           </Grid>
         <Grid container item md={6} justify="flex-start">
           <Grid item xs={9}>
-            <Typography variant="h4">
-              Core Skills
-            </Typography>
-            <List>
-              {skillSet.map(skill => (
-                <ListItem key={skill.name}>
-                  <ListItemAvatar>
-                      <Avatar>
-                        {skill.avatar ? skill.avatar : <CodeIcon />}
-                      </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={skill.name}
-                    secondary={skill.proficiency}
-                  />
-                  <CompletionBar
-                    width={300}
-                    height={20}
-                    percentage
-                    value={skill.progress}
-                    in={showSkills}
-                  />
-                </ListItem>
-              ))}
-            </List>
+            <Box  pl={4}>
+              <Typography variant="h4">
+                Core Skills
+              </Typography>
+              <List>
+                {skillSet.map(skill => (
+                  <ListItem key={skill.name}>
+                    <CompletionBar
+                      avatar={skill.avatar ? skill.avatar : <CodeIcon />}
+                      height={40}
+                      percentage
+                      value={skill.progress}
+                      in={showSkills}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
           </Grid>
         </Grid>
       </Grid>
