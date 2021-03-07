@@ -1,7 +1,4 @@
-import React, {
-  useRef,
-  useState
-} from 'react';
+import React from 'react';
 
 import {
   Avatar,
@@ -25,8 +22,6 @@ import {
 } from "react-icons/di";
 
 import CompletionBar from './common/CompletionBar';
-import useScrollYPosition from '../hooks/useScrollYPosition';
-
 
 const useStyles = makeStyles((theme) => ({
   aboutMe: {
@@ -44,18 +39,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const About = (props) => {
-  const container = useRef(null);
-  const [showSkills, setShowSkills] = useState(false);
   const {
-    isMobile
+    isMobile,
+    visible
   } = props;
-  useScrollYPosition((position) => {
-    const content = container.current;
-    if (!content) return;
-    if (position > content.offsetTop-window.innerHeight/5) {
-      setShowSkills(true);
-    }
-  });
   const classes = useStyles();
   const skillSet = [
     {
@@ -98,7 +85,7 @@ const About = (props) => {
   return (
     <Slide
       direction="right"
-      in={showSkills}
+      in={visible}
       appear={true}
     >
       <Grid
@@ -107,7 +94,6 @@ const About = (props) => {
         alignItems="center"
         justify="space-between"
         direction="row"
-        ref={container}
         style={{
           minHeight: '100vh',
           marginTop: (isMobile ? 'inherit' : -56),
@@ -165,7 +151,7 @@ const About = (props) => {
                     height={20}
                     percentage
                     value={skill.progress}
-                    in={showSkills}
+                    in={visible}
                   />
                 </ListItem>
               ))}

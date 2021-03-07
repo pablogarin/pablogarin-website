@@ -3,6 +3,7 @@ import React, {
   cloneElement,
   Children,
   useState,
+  useEffect
 } from 'react';
 import {
   Grid,
@@ -12,10 +13,11 @@ import {
 } from '@material-ui/core';
 import SectionBackground from './SectionBackground';
 import useScrollYPosition from '../../hooks/useScrollYPosition';
+import useInView from '../../hooks/useInView';
 
 
 const Section = forwardRef((props, ref) => {
-  const [showTitle, setShowTitle] = useState(false);
+  // const [showTitle, setShowTitle] = useState(false);
   const {
     className,
     children,
@@ -23,7 +25,12 @@ const Section = forwardRef((props, ref) => {
     sectionTitle,
     parity,
   } = props;
-  console.log(parity)
+  const [titleRef, showTitle] = useInView({ rootMargin: '-160px' })
+  useEffect(() => {
+    titleRef(ref.current)
+  }, [ref])
+  // titleRef(ref.current)
+  /*
   useScrollYPosition((position) => {
     if (!ref.current) return;
     const scrollPosition = window.pageYOffset;
@@ -31,12 +38,15 @@ const Section = forwardRef((props, ref) => {
       setShowTitle(true);
     }
   });
+  */
+  const [setRef, visible] = useInView({ rootMargin: '-50%' })
   const childrenWithProps = Children.map(
     children,
     (c) => cloneElement(
       c,
       {
-        isMobile
+        isMobile,
+        visible,
       }
     )
   );
@@ -66,7 +76,9 @@ const Section = forwardRef((props, ref) => {
             item
             container
             direction="row"
-            justify="center">
+            justify="center"
+            ref={setRef}
+          >
               <SectionBackground parity={parity} />
               {childrenWithProps}
           </Grid>
