@@ -6,11 +6,13 @@ import React, {
   useEffect
 } from 'react';
 import {
+  Box,
   Grid,
   Divider,
   Slide,
   Typography
 } from '@material-ui/core';
+import Title from '../styled/Title'
 import SectionBackground from './SectionBackground';
 import useScrollYPosition from '../../hooks/useScrollYPosition';
 import useInView from '../../hooks/useInView';
@@ -66,9 +68,11 @@ const Section = forwardRef((props, ref) => {
           {sectionTitle && (
             <Grid item xs={12} style={{ height: 80 }}>
               <Slide direction="right" in={showTitle} mountOnEnter unmountOnExit>
-                <Typography variant="h3" align="center" spacing={15}>
-                  {sectionTitle}
-                </Typography>
+                <Box>
+                  <Title in={showTitle}>
+                    {sectionTitle}
+                  </Title>
+                </Box>
               </Slide>
             </Grid>
           )}

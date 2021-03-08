@@ -8,6 +8,7 @@ import {Avatar, Box, Typography} from '@material-ui/core';
 import {
   makeStyles
 } from '@material-ui/core/styles'
+import useInView from '../../hooks/useInView'
 
 const getSpeed = (x) => {
   // Speed set by inverted Parabola
@@ -68,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CompletionBar = (props) => {
+  const [ref, visible] = useInView({ rootMargin: '-100px' })
   const canvasRef = useRef(null);
   const {
     avatar,
@@ -75,7 +77,6 @@ const CompletionBar = (props) => {
     height,
     value,
   } = props;
-  const start = props.in !== undefined ? props.in : true;
   const [percentage, setPercentage] = useState('0%')
   const classes = useStyles();
   useEffect(() => {
@@ -86,7 +87,6 @@ const CompletionBar = (props) => {
     } else {
       canvas.width = width;
     }
-    console.log(canvas.width)
     const context = canvas.getContext('2d');
     let fillStep = canvas.width*value*0.03; // constant speed fill
     let currentFill = 0.1; // start fill value
@@ -108,11 +108,11 @@ const CompletionBar = (props) => {
       context.fill();
       context.closePath();
     };
-    if (start) fillBar();
+    if (visible) fillBar();
     setPercentage(`${value*100}%`)
-  }, [height, width, value, start])
+  }, [height, width, value, canvasRef, visible])
   return (
-    <div className={classes.root}>
+    <div className={classes.root} ref={ref}>
       <Box className={classes.icon}>
         {avatar}
       </Box>

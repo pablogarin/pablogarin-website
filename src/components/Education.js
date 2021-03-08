@@ -19,8 +19,22 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import FormattedDate from './common/FormattedDate';
 
 const useStyles = makeStyles((theme) => ({
-  cardHeader: {
-    background: 'rgba(60,60,60,0.15)'
+  card: {
+    position: 'relative',
+    borderTop: '5px solid #008080',
+    '&::after': {
+      display: 'block',
+      position: 'absolute',
+      height: '275px',
+      width: '275px',
+      content: '""',
+      backgroundImage: 'url(/res/images/degree_seal.svg)',
+      backgroundRepeat: 'no-repeat',
+      right: -50,
+      bottom: -40,
+      opacity: 0.1
+    }
+
   },
   cardAvatar: {
     backgroundColor: theme.palette.primary.main
@@ -68,7 +82,7 @@ const Education = (props) => {
       item
       container
       justify="center"
-      alignItems="flex-start"
+      alignItems="space-between"
       spacing={2}
       style={{margin:'16px 0'}}>
         {degrees.map(degree => (
@@ -76,30 +90,56 @@ const Education = (props) => {
             key={degree.name}
             item
             xs={9}
-            md={3}>
+            md={3}
+            style={{
+              display: 'flex'
+            }}
+          >
             <Card
               raised
-              elevation={3}>
+              elevation={3}
+              style={{
+                flex: '1'
+              }}
+              className={classes.card}
+            >
               <CardHeader
-                avatar={
-                  <Avatar className={classes.cardAvatar}>
-                    <SchoolIcon />
-                  </Avatar>
-                }
                 title={
-                  <Typography variant="h5" color="secondary">{degree.name}</Typography>
+                  <Typography
+                    variant="h5"
+                    style={{
+                      color : '#008080',
+                      padding: '12px 16px',
+                      fontWeight: 700
+                    }}
+                    align="center"
+                  >{degree.name}</Typography>
                 }
-                subheader={`${degree.school}, ${degree.location}`}
-                className={classes.cardHeader}/>
-              <CardContent>
-                <List dense>
+                subheader={(
+                  <Typography
+                    style={{
+                      color: '#333',
+                      fontWeight: 700,
+                      padding: 12
+                    }}
+                    align="center"
+                  >
+                    {degree.school}, {degree.location}
+                  </Typography>
+                )}
+              />
+              <CardContent style={{
+                paddingTop: 0
+              }}>
+                <List dense style={{
+                  paddingTop: 0,
+                  marginTop: -8,
+                  fontSize: 10
+                }}>
                   <ListItem>
-                    <ListItemIcon>
-                      <CalendarTodayIcon color="secondary"/>
-                    </ListItemIcon>
                     <ListItemText 
                       primary={
-                        <Typography fontWeight={600}>
+                        <Typography fontWeight={600} style={{color: '#333', fontSize: '0.8rem' }}>
                           <FormattedDate
                             date={degree.startDate} />
                           &nbsp;-&nbsp;
@@ -111,11 +151,13 @@ const Education = (props) => {
                   </ListItem>
                   {degree.achievements.map(achievement => (
                     <ListItem key={achievement}>
-                      <ListItemIcon>
-                        <CheckCircleIcon color="secondary"/>
-                      </ListItemIcon>
                       <ListItemText
-                        primary={achievement} />
+                        primary={(
+                          <Typography style={{color: '#333', fontSize: '0.8rem' }}>
+                            {achievement}
+                          </Typography>
+                        )}
+                      />
                     </ListItem>
                   ))}
                 </List>
