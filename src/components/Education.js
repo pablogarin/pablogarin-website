@@ -94,6 +94,7 @@ const Education = (props) => {
             style={{
               display: 'flex'
             }}
+            spacing={3}
           >
             <Card
               raised

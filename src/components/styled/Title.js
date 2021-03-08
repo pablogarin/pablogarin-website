@@ -2,13 +2,13 @@ import styled, { keyframes } from 'styled-components'
 
 const grow = keyframes`
  from {
-   width: 0%;
    left: 50%;
+   width: 0%;
    opacity: 1;
  }
- to: {
-   width: 100%;
+ to {
    left: 0;
+   width: 100%;
    opacity: 1;
  }
 `
@@ -27,11 +27,12 @@ const Title = styled.span`
   &:after {
     display: block;
     content: "";
-    display: absolute;
-    width: 100%;
-    opacity: 1;
+    position: absolute;
+    width: 0%;
+    opacity: 0;
     height: 5px;
     background: ${props => props.color || '#fff'};
+    animation: ${grow} 0.2s forwards 0.3s;
   }
 `
 
